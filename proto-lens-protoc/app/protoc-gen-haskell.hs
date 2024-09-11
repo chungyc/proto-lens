@@ -75,7 +75,7 @@ makeResponse dflags prog request = let
     in defMessage
            & #supportedFeatures .~
                (foldl (.|.) zeroBits $ fmap (toEnum . fromEnum) features)
-           & #minimumEdition .~ fromIntegral (fromEnum EDITION_LEGACY)
+           & #minimumEdition .~ fromIntegral (fromEnum EDITION_PROTO2)
            & #maximumEdition .~ fromIntegral (fromEnum EDITION_2023)
            & #file .~ [ defMessage
                             & #name .~ outputName
