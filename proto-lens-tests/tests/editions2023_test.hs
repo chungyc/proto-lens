@@ -23,9 +23,11 @@ import Proto.Editions2023_Fields
     , d
     , e
     , f
+    , g
     , s
     , sub
     , maybe'c
+    , maybe'e
     , maybe'sub
     , maybe's
     , enum
@@ -74,11 +76,14 @@ main = testMain
             let val = (defMessage :: Foo'Sub) & e .~ 17
             Just val @=? ((defMessage :: Foo) & s .~ val) ^. maybe's
         ]
-    -- Repeated scalar fields in proto3 should serialize as "packed" by default.
-    , serializeTo "packed-by-default"
+    , serializeTo "expanded-via-file-scope-override"
         (defMessage & f .~ [1,2,3] :: Foo)
         (vcat [keyedInt "f" x | x <- [1..3]])
-        $ tagged 7 $ Lengthy $ mconcat [varInt x | x <- [1..3]]
+        $ mconcat [tagged 7 $ VarInt x | x <- [1..3]]
+    , serializeTo "packed-via-field-scope-override"
+        (defMessage & g .~ [1,2,3] :: Foo)
+        (vcat [keyedInt "g" x | x <- [1..3]])
+        $ tagged 9 $ Lengthy $ mconcat [varInt x | x <- [1..3]]
     , runTypedTest (roundTripTest "foo" :: TypedTest Foo)
     ]
   , testGroup "Strings"
@@ -89,12 +94,17 @@ main = testMain
         (Nothing :: Maybe Strings)
         $ tagged 2 $ Lengthy invalidUtf8
     ]
-  -- Scalar field defaults are indistinguishable from unset fields.
+  -- With field presence overridden to implicit,
+  -- scalar field defaults are indistinguishable from unset fields.
   , testGroup "defaulting"
       [ testCase "int" $ (defMessage :: Foo) @=? (defMessage & a .~ 0)
       , testCase "bytes" $ (defMessage :: Strings) @=? (defMessage & bytes .~ "")
       , testCase "string" $ (defMessage :: Strings) @=? (defMessage & string .~ "")
       , testCase "enum" $ (defMessage :: Foo) @=? (defMessage & enum .~ Foo'Enum1)
+      ]
+  , testGroup "explicit"
+      [ testCase "set" $ (defMessage & e .~ 0 :: Foo'Sub) ^. maybe'e @=? Just 0
+      , testCase "unset" $ (defMessage :: Foo'Sub) ^. maybe'e @=? Nothing
       ]
   -- Enums are sum types, except for aliases
   , testGroup "enum"

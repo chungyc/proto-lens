@@ -1,15 +1,9 @@
 edition = "2023";
 
-// Features to preserve proto3 behavior.
-// See https://protobuf.dev/editions/features/#proto3-behavior.
-//
-// Eventually we want this to diverge from proto3.proto,
-// e.g., set features on individual fields,
-// but we use a test virtually identical to proto3_test.hs for now.
+// Default is PACKED in this edition.
+// Test file-scope override.
 option features.field_presence = IMPLICIT;
-option features.enum_type = OPEN;
-option features.json_format = ALLOW;
-option features.utf8_validation = VERIFY;
+option features.repeated_field_encoding = EXPANDED;
 
 package editions2023;
 
@@ -23,7 +17,7 @@ message Foo {
   }
 
   message Sub {
-    int32 e = 1;
+    int32 e = 1 [features.field_presence = EXPLICIT];
   }
   Sub sub = 5;
 
@@ -36,6 +30,9 @@ message Foo {
   FooEnum enum = 6;
 
   repeated int32 f = 7;
+
+  // Test field-scope override.
+  repeated int32 g = 9 [features.repeated_field_encoding = PACKED];
 }
 
 message Strings {
