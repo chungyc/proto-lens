@@ -76,9 +76,9 @@ jobs:
 
       # Installs the recent protoc, for now unpinned to gain some experience
       - name: Install Protoc
-        uses: arduino/setup-protoc@v1
+        uses: arduino/setup-protoc@v3
         with:
-          version: '3.x'
+          version: '28.x'
 
       # Install Stack without GHC first, so we have an opportunity to cache the
       # Pantry package index.
