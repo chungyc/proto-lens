@@ -40,7 +40,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@6d193bf28034eafb982f37bd894289fe649468fc
+        uses: actions/checkout@6b42224f41ee5dfe5395e27c8b2746f1f9955030
         with:
           submodules: true
 
@@ -70,7 +70,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@6d193bf28034eafb982f37bd894289fe649468fc
+        uses: actions/checkout@6b42224f41ee5dfe5395e27c8b2746f1f9955030
         with:
           submodules: true
 
