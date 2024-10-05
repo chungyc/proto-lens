@@ -1,0 +1,13 @@
+name: Fourmolu
+on: [push, pull_request]
+
+jobs:
+  fourmolu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
+      - uses: haskell-actions/run-fourmolu@5a9f41fa092841e52e6c57dde5600e586fa766a4 # v10
+        with:
+          pattern: |
+            **/*.hs
+            !proto-lens-protoc/app/Proto/**/*.hs
