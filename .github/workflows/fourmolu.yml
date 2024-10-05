@@ -10,4 +10,7 @@ jobs:
         with:
           pattern: |
             **/*.hs
+            # Generated code.
             !proto-lens-protoc/app/Proto/**/*.hs
+            # CPP.
+            !proto-lens/src/Data/ProtoLens/Encoding/Parser/Internal.hs
