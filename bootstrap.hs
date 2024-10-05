@@ -5,7 +5,9 @@
 -- https://developers.google.com/open-source/licenses/bsd
 
 -- To regenerate the bootstrapping proto bindings:
--- $ runghc bootstrap.hs
+--
+--     $ runghc bootstrap.hs
+--
 -- Note: if this doesn't work, you may need to edit the "location" field in
 -- stack-boostrap.yaml.
 import Control.Applicative ((<$>))
