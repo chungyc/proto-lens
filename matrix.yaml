@@ -29,10 +29,14 @@ build:
     compiler: ghc-9.4.8
     stackyaml: stack.yaml
 
-  - resolver: lts-22.15
-    compiler: ghc-9.6.4
+  - resolver: lts-22.43
+    compiler: ghc-9.6.6
     stackyaml: stack.yaml
 
-  - resolver: nightly-2024-04-06
-    compiler: ghc-9.8.2
+  - resolver: lts-23.18
+    compiler: ghc-9.8.4
+    stackyaml: stack.yaml
+
+  - resolver: nightly-2025-04-12
+    compiler: ghc-9.10.1
     stackyaml: stack.yaml
