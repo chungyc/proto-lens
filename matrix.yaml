@@ -33,10 +33,6 @@ build:
     compiler: ghc-9.6.6
     stackyaml: stack.yaml
 
-  - resolver: lts-22.43
-    compiler: ghc-9.6.6
-    stackyaml: stack.yaml
-
   - resolver: lts-23.18
     compiler: ghc-9.8.4
     stackyaml: stack.yaml
