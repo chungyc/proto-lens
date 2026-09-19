@@ -14,7 +14,8 @@
 
 name: Stack CI
 
-permissions: read-all
+permissions:
+  contents: read
 
 on:
   push:

@@ -2,6 +2,10 @@ on:
   - push
   - pull_request
 name: cabal build
+
+permissions:
+  contents: read
+
 jobs:
   runhaskell:
     name: cabal test
